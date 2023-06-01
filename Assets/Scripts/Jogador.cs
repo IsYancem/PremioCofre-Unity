@@ -4,30 +4,47 @@ using UnityEngine;
 
 public class Jogador : MonoBehaviour
 {
-    //public GameManager gameManager;
     public float fuerzaSalto;
-    //public int vida = 500;  // Nueva variable para las vidas del jugador
+    public float velocidad; 
 
     private Rigidbody2D rb;
     private Animator anim;
-    
-    // Start is called before the first frame update
+    private bool mirandoDerecha = true; // Nueva variable para determinar hacia donde mira el personaje
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
-            if (Input.GetKeyDown(KeyCode.Space))
+        // Mover al jugador a la izquierda
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            rb.velocity = new Vector2(-velocidad, rb.velocity.y);
+            if (mirandoDerecha)
             {
-                anim.SetBool("isJump", true);
-                rb.AddForce(new Vector2(0, fuerzaSalto));
+                Flip();
             }
-        
+        }
+
+        // Mover al jugador a la derecha
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            rb.velocity = new Vector2(velocidad, rb.velocity.y);
+            if (!mirandoDerecha)
+            {
+                Flip();
+            }
+        }
+
+        // Saltar
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            anim.SetBool("isJump", true);
+            rb.AddForce(new Vector2(0, fuerzaSalto));
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -36,8 +53,14 @@ public class Jogador : MonoBehaviour
         {
             anim.SetBool("isJump", false);
         }
-
     }
 
-    
+    // Nueva función para voltear el personaje
+    void Flip()
+    {
+        mirandoDerecha = !mirandoDerecha; 
+        Vector3 escala = transform.localScale;
+        escala.x *= -1;
+        transform.localScale = escala;
+    }
 }
