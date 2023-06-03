@@ -16,10 +16,10 @@ The game proposes a challenge of skill and reflexes. The player must control the
 ![Player State "Run" and "Jump"](Images/image2.png)
 *Image 2. Player State "Run" and "Jump"*
 
-![Game State with Coin Rewards](Images/image3.png)
+![Game State with Coin Rewards](Images/image4.png)
 *Image 3. Game State with Coin Rewards*
 
-![Player Winning and Chest Open](Images/image4.png)
+![Player Winning and Chest Open](Images/image3.png)
 *Image 4. Player Winning and Chest Open*
 
 ## How to Use the Project
